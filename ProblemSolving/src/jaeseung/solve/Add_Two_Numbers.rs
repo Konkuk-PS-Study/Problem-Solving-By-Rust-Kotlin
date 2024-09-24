@@ -5,7 +5,7 @@ fn main() {
     let l1 = Some(Box::new(ListNode::new(9)));
     let l2 = Some(Box::new(ListNode::new(8)));
 
-    let result = Solution::add_two_numbers(l1, l2);
+    let result = Solution::add_two_numbers2(l1, l2);
 
     println!("{:?}", result);
 }
@@ -55,6 +55,26 @@ impl Solution {
         }
 
         ret
+    }
+
+    pub fn add_two_numbers2(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        match (l1, l2) {
+            (None, None) => None,
+            (Some(n), None) => Some(n),
+            (None, Some(n)) => Some(n),
+            (Some(n1), Some(n2)) => {
+                let sum = (n1.val + n2.val) % 10;
+                let carry = (n1.val + n2.val) / 10;
+
+                Some(new Box(new ListNode {
+                    val: sum,
+                    next: add_two_numbers2(new Box(new ListNode {
+                        val: n1.val + carry,
+                        next: n1.next
+                    }), n2.next),
+                }))
+            } 
+        }
     }
 }
 
