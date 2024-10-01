@@ -9,6 +9,10 @@ out/
 ### Gradle ###
 .gradle/
 build/
+gradle/
+build.gradle
+gradlew
+gradlew.bat
 
 ### Kotlin ###
 *.class
